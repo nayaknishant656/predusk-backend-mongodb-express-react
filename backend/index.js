@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
     res.send('API is running...');
 });
 app.use('/api/profiles', profileRoutes);

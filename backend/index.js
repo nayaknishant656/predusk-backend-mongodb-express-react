@@ -17,7 +17,10 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/', profileRoutes);
+app.use('/', (req, res) => {
+    res.send('API is running...');
+});
+app.use('/api/profiles', profileRoutes);
 
 // Move the base check to another path or keep it if it doesn't conflict
 // app.get('/', (req, res) => {

@@ -1,4 +1,5 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
@@ -10,7 +11,9 @@ const PORT = process.env.PORT || 5000;
 
 // Connect to database
 connectDB();
-
+if (connectDB.connection.readyState === 1) {
+    console.log('MongoDB Connected');
+}
 // Middleware
 // Global CORS Configuration - Allows all origins
 app.use(cors());

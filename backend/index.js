@@ -11,9 +11,7 @@ const PORT = process.env.PORT || 5000;
 
 // Connect to database
 connectDB();
-if (connectDB.connection.readyState === 1) {
-    console.log('MongoDB Connected');
-}
+
 // Middleware
 // Global CORS Configuration - Allows all origins
 app.use(cors());

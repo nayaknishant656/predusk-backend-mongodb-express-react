@@ -1,12 +1,15 @@
 const mongoose = require('mongoose');
 
+constMONGO_URI = 'mongodb+srv://mobideas2:nishantnayak2297@cluster0.05pqoma.mongodb.net/StudentProfile';
+
+
 const connectDB = async () => {
-  if (!process.env.MONGO_URI) {
+  if (!MONGO_URI) {
     console.error('Error: MONGO_URI is not defined in environment variables.');
     return;
   }
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI, {
+    const conn = await mongoose.connect(MONGO_URI, {
       serverSelectionTimeoutMS: 5000 // Timeout after 5s if can't connect
     });
     console.log(`MongoDB Connected: ${conn.connection.host}`);

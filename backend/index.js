@@ -1,5 +1,7 @@
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '.env') });
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config({ path: path.join(__dirname, '.env') });
+}
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
@@ -23,11 +25,6 @@ app.get('/', (req, res) => {
 });
 app.use('/api/profiles', profileRoutes);
 
-// Move the base check to another path or keep it if it doesn't conflict
-// app.get('/', (req, res) => {
-//     res.send('API is running...');
-// });
-
 if (process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
@@ -35,3 +32,4 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = app;
+

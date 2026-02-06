@@ -11,11 +11,7 @@ const profileRoutes = require('./routes/profileRoutes');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Connect to database
-connectDB();
-
 // Middleware
-// Global CORS Configuration - Allows all origins
 app.use(cors());
 app.use(express.json());
 
@@ -25,11 +21,21 @@ app.get('/', (req, res) => {
 });
 app.use('/api/profiles', profileRoutes);
 
-if (process.env.NODE_ENV !== 'production') {
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-    });
-}
+// Connect to database and then start server
+const startServer = async () => {
+    try {
+        await connectDB();
+
+        if (process.env.NODE_ENV !== 'production') {
+            app.listen(PORT, () => {
+                console.log(`Server running on port ${PORT}`);
+            });
+        }
+    } catch (error) {
+        console.error('Failed to start server:', error);
+    }
+};
+
+startServer();
 
 module.exports = app;
-
